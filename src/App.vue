@@ -2,7 +2,7 @@
   <img alt="Mastodon logo" class="app-logo" src="./assets/logo.png">
   <AccountLogin v-if="!access.host && !access.code"/>
   <AccessToken v-if="access.host && access.code && !access.token" :access="access" @data="setData"/>
-  <MassFollow v-if="access.host && access.code && access.token" :access="access"/>
+  <MassFollow v-if="access.host && access.code && access.token && access.type" :access="access"/>
 </template>
 
 <script>
@@ -18,7 +18,8 @@ export default {
       access: {
         host: null,
         code: null,
-        token: null
+        token: null,
+        type: null
       }
     }
   },
@@ -33,8 +34,9 @@ export default {
     }
   },
   methods: {
-    setData(token){
+    setData(token, type){
       this.access.token = token;
+      this.access.type = type;
     },
     tryCode(){
       const params = new Proxy(new URLSearchParams(window.location.search), {

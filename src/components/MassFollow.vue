@@ -72,7 +72,7 @@ export default {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.access.code}`
+          'Authorization': `${this.access.type} ${this.access.token}`
         }),
         body: JSON.stringify({
           grant_type: 'write:follows'
@@ -91,7 +91,7 @@ export default {
       this.loading = true;
       fetch(`${this.mastodonHost}/api/v1/directory.json?offset=${this.offset}&local=true&limit=1000`, {
         headers: new Headers({
-          'Authorization': `Bearer ${this.access.code}`
+          'Authorization': `${this.access.type} ${this.access.token}`
         })
       })
           .then(response => response.json())

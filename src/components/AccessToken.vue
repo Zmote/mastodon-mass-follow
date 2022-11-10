@@ -46,7 +46,7 @@
       <button v-if="!tokenVerified" class="btn btn-primary" @click="getAccessToken">
         Get Access Token<span v-if="loading" class="spinner-border spinner-border-sm" role="status"></span>
       </button>
-      <button v-else class="btn btn-success" @click="$emit('data', accessToken)">
+      <button v-else class="btn btn-success" @click="$emit('data', accessToken, tokenType)">
         Continue
       </button>
     </div>
@@ -69,6 +69,7 @@ export default {
       clientSecret: '',
       clientKey: '',
       accessToken: null,
+      tokenType: null
     }
   },
   methods: {
@@ -91,6 +92,7 @@ export default {
           .then(response => response.json())
           .then((json) => {
             this.accessToken = json.access_token;
+            this.tokenType = json.token_type;
           })
           .then(() => {
             if (this.accessToken) {
