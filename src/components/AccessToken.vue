@@ -84,7 +84,7 @@ export default {
           client_id: this.clientKey,
           client_secret: this.clientSecret,
           redirect_uri: 'https://mastodon-mass-follow.netlify.app',
-          grant_type: 'client_credentials',
+          grant_type: 'authorization_code',
           scope: 'read write follow',
           code: this.access.code
         })
