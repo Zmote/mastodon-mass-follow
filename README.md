@@ -1,5 +1,7 @@
 # mastodon_mass_follow
 
+Mass Follow Accounts on a certain Mastodon host.
+
 ## Project setup
 ```
 npm install

@@ -1,15 +1,65 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="Mastodon logo" class="app-logo" src="./assets/logo.png">
+  <AccountLogin v-if="!loginPerformed && !access.host && !access.code" @data="setData"/>
+  <MassFollow v-else :access="access"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MassFollow from "@/components/MassFollow";
+import AccountLogin from "@/components/AccountLogin";
 
 export default {
   name: 'App',
+  data(){
+    return {
+      loginPerformed: false,
+      access: {
+        host: null,
+        code: null
+      }
+    }
+  },
   components: {
-    HelloWorld
+    AccountLogin,
+    MassFollow
+  },
+  computed: {
+    readCode(){
+      return this.tryCode();
+    }
+  },
+  methods: {
+    setData(host, token){
+      this.host = host;
+      this.code = token;
+    },
+    tryCode(){
+      const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+      });
+      return params.code || null;
+    },
+    parseURL(url) {
+      let a = document.createElement('a');
+      a.href = url;
+      if(a.hostname){
+        if(a.port !== '80'){
+          return `${a.protocol}//${a.hostname}:${a.port}`;
+        }
+        return `${a.protocol}//${a.hostname}`;
+      }
+      return null;
+    },
+  },
+  created() {
+    if(this.readCode){
+      const host = this.parseURL(window.location);
+      if(host){
+        this.access.host = host;
+        this.access.code = this.readCode;
+        this.loginPerformed = true;
+      }
+    }
   }
 }
 </script>
@@ -20,7 +70,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 1rem;
+}
+
+.app-logo{
+  width: 100px;
+  height: auto;
 }
 </style>
