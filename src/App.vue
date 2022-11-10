@@ -5,7 +5,7 @@
     <p>First Create an Application from Preferences > Development > New Application, use this Webpage as Application
       URL and Redirection URL</p>
   </div>
-  <AccountLogin v-if="!access.host && !access.code" @host="setHost"/>
+  <AccountLogin v-if="!access.host && !access.code"/>
   <AccessToken v-if="access.host && access.code && !access.token" :access="access" @data="setData"/>
   <MassFollow v-if="access.host && access.code && access.token && access.type" :access="access"/>
 </template>
@@ -39,9 +39,6 @@ export default {
     }
   },
   methods: {
-    setHost(host){
-      this.access.host = host;
-    },
     setData(token, type){
       this.access.token = token;
       this.access.type = type;

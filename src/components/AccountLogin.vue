@@ -48,12 +48,12 @@ export default {
   },
   methods: {
     redirectToLogin(){
-      this.$emit('host', this.mastodonHost);
       const clientId = `client_id=${this.clientKey}`;
       const scope = `scope=${this.scope}`;
       const redirectUri = `redirect_uri=${this.redirectUri}`;
       const responseType = `response_type=${this.responseType}`;
-      const params = [clientId, scope, redirectUri, responseType].join('&')
+      const forceLogin = 'force_login=true';
+      const params = [clientId, scope, redirectUri, responseType, forceLogin].join('&')
       document.location = encodeURI(`${this.mastodonHost}/oauth/authorize?${params}`);
     }
   }
