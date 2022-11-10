@@ -33,7 +33,7 @@ export default {
     }
   },
   methods: {
-    setData(host, token){
+    setData(token){
       this.access.token = token;
     },
     tryCode(){
