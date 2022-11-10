@@ -38,21 +38,12 @@ export default {
         get: (searchParams, prop) => searchParams.get(prop),
       });
       return params.code || null;
-    },
-    parseURL(url) {
-      let a = document.createElement('a');
-      a.href = url;
-      if(a.origin){
-        return `${a.origin}`;
-      }
-      return null;
-    },
+    }
   },
   created() {
     if(this.readCode){
-      const host = this.parseURL(window.location);
-      if(host){
-        this.access.host = host;
+      if(document.referrer){
+        this.access.host = document.referrer;
         this.access.code = this.readCode;
         this.loginPerformed = true;
       }

@@ -68,7 +68,7 @@ export default {
     },
     followAccount(id){
       this.accountsLoading[id] = true;
-      fetch(`${this.access.host}/api/v1/accounts/${id}/follow`, {
+      fetch(`${this.access.host}api/v1/accounts/${id}/follow`, {
         method: 'POST',
         headers: new Headers({
           'Content-Type': 'application/json',
