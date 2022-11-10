@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h1>Mastodon Mass Follow</h1>
     <div class="row">
       <div class="input-group mb-3">
         <input type="text"

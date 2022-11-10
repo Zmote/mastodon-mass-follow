@@ -48,6 +48,7 @@ export default {
   },
   methods: {
     redirectToLogin(){
+      this.$emit('host', this.mastodonHost);
       const clientId = `client_id=${this.clientKey}`;
       const scope = `scope=${this.scope}`;
       const redirectUri = `redirect_uri=${this.redirectUri}`;

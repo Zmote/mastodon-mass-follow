@@ -1,9 +1,5 @@
 <template>
   <div class="container">
-    <div class="row mt-4">
-      <p>First Create an Application from Preferences > Development > New Application, use this Webpage as Application
-        URL</p>
-    </div>
     <div class="row my-2 align-items-center">
       <div class="col-2">
         <label class="col-form-label">
