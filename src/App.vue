@@ -1,7 +1,7 @@
 <template>
   <img alt="Mastodon logo" class="app-logo" src="./assets/logo.png">
   <AccountLogin v-if="!access.host && !access.code"/>
-  <AccessToken v-if="access.host && access.code" :access="access" @data="setData"/>
+  <AccessToken v-if="access.host && access.code && !access.token" :access="access" @data="setData"/>
   <MassFollow v-if="access.host && access.code && access.token" :access="access"/>
 </template>
 

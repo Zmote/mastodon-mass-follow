@@ -84,7 +84,7 @@ export default {
           client_secret: this.clientSecret,
           redirect_uri: 'https://mastodon-mass-follow.netlify.app',
           grant_type: 'client_credentials',
-          scope: 'read write follow',
+          scope: 'follow',
           code: this.access.code
         })
       })
