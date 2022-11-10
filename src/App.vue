@@ -42,11 +42,8 @@ export default {
     parseURL(url) {
       let a = document.createElement('a');
       a.href = url;
-      if(a.hostname){
-        if(a.port !== '80'){
-          return `${a.protocol}//${a.hostname}:${a.port}`;
-        }
-        return `${a.protocol}//${a.hostname}`;
+      if(a.origin){
+        return `${a.origin}`;
       }
       return null;
     },

@@ -41,7 +41,7 @@ export default {
     return {
       responseType: 'code',
       scope: 'read write follow',
-      redirectUri: 'https://mastodon-mass-follow.netlify.app',
+      redirectUri: 'https://mastodon-mass-follow.netlify.app?host=',
       clientKey: '',
       mastodonHost : 'https://mastodon.online'
     }
