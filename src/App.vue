@@ -1,25 +1,29 @@
 <template>
   <img alt="Mastodon logo" class="app-logo" src="./assets/logo.png">
-  <AccountLogin v-if="!loginPerformed && !access.host && !access.code" @data="setData"/>
-  <MassFollow v-else :access="access"/>
+  <AccountLogin v-if="!access.host && !access.code"/>
+  <AccessToken v-if="access.host && access.code" :access="access" @data="setData"/>
+  <MassFollow v-if="access.host && access.code && access.token" :access="access"/>
 </template>
 
 <script>
 import MassFollow from "@/components/MassFollow";
 import AccountLogin from "@/components/AccountLogin";
+import AccessToken from "@/components/AccessToken";
 
 export default {
   name: 'App',
   data(){
     return {
-      loginPerformed: false,
+      tokenAccessed: null,
       access: {
         host: null,
-        code: null
+        code: null,
+        token: null
       }
     }
   },
   components: {
+    AccessToken,
     AccountLogin,
     MassFollow
   },
@@ -30,8 +34,7 @@ export default {
   },
   methods: {
     setData(host, token){
-      this.host = host;
-      this.code = token;
+      this.access.token = token;
     },
     tryCode(){
       const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -45,7 +48,6 @@ export default {
       if(document.referrer){
         this.access.host = document.referrer;
         this.access.code = this.readCode;
-        this.loginPerformed = true;
       }
     }
   }
